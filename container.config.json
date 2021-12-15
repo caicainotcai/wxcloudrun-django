@@ -8,13 +8,14 @@
 	"mem": 0.5,                                     // 容器规格-内存大小
 	"policyType": "cpu",                            // 扩缩容条件：CPU使用率
 	"policyThreshold": 60,                          // 扩缩容条件：使用率超过60%触发
-	"envParams": {},                                // 环境变量。可以有多个。
+	"envParams": {
+		"MYSQL_ADDRESS":"10.0.224.3:3306",
+		"MYSQL_PASSWORD":")bk7K.9w",
+		"MYSQL_USERNAME":"root"
+	},                                // 环境变量。可以有多个。
 	"customLogs": "stdout",                         // 日志采集路径
 	"initialDelaySeconds": 2,                        // 容器启动后延迟多久开始健康检查。默认值2秒。
 	"dataBaseName":"django_demo",
-	"MYSQL_ADDRESS":"10.0.224.3:3306",
-	"MYSQL_PASSWORD":")bk7K.9w",
-	"MYSQL_USERNAME":"root",
 	"executeSQLs":[
 		"CREATE DATABASE IF NOT EXISTS django_demo;",
 		"USE django_demo;",
