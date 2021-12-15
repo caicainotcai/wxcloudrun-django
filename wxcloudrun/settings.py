@@ -201,7 +201,7 @@ DATABASES['default']['HOST']
 DATABASES['default']['PORT']
 DATABASES['default']['PASSWORD']
 '''
-conn = pymysql.connect(host=os.environ.get("MYSQL_ADDRESS"), user=DATABASES['default']['USER'],password=DATABASES['default']['PASSWORD'],database=os.environ.get("MYSQL_DATABASE"),charset=“utf8”)
+conn = pymysql.connect(host=os.environ.get("MYSQL_ADDRESS"), user=DATABASES['default']['USER'],password=DATABASES['default']['PASSWORD'],database=os.environ.get("MYSQL_DATABASE"),charset="utf8")
 # 得到一个可以执行SQL语句的光标对象
 cursor = conn.cursor()
 # 定义要执行的SQL语句
