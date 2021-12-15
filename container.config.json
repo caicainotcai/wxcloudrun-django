@@ -10,6 +10,9 @@
 	"customLogs": "stdout",                         // 日志采集路径
 	"initialDelaySeconds": 2,                        // 容器启动后延迟多久开始健康检查。默认值2秒。
 	"dataBaseName":"django_demo",
+	"MYSQL_ADDRESS":"10.0.224.3:3306",
+	"MYSQL_PASSWORD":")bk7K.9w",
+	"MYSQL_USERNAME":"root",
 	"executeSQLs":[
 		"CREATE DATABASE IF NOT EXISTS django_demo;",
 		"USE django_demo;",
