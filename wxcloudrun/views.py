@@ -3,7 +3,7 @@ import logging
 
 from django.http import JsonResponse
 from django.shortcuts import render
-from wxcloudrun.models import Counters
+from wxcloudrun.models import Counters,Markers
 
 
 logger = logging.getLogger('log')
@@ -85,6 +85,16 @@ def update_count(request):
         except Counters.DoesNotExist:
             logger.info('record not exist')
         return JsonResponse({'code': 0, 'data': 0},
+                    json_dumps_params={'ensure_ascii': False})
+    elif body['action'] == 'mark':
+        #更新位置信息
+        data=Markers()
+        data.userid=body['userid']
+        data.longtitude=body['longtitude']
+        data.latitude=body['latitude']
+        data.memo=body['memo']
+        data.save()
+        return JsonResponse({'marked'': 1, "data": data.id},
                     json_dumps_params={'ensure_ascii': False})
     else:
         return JsonResponse({'code': -1, 'errorMsg': 'action参数错误'},
