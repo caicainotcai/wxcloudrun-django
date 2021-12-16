@@ -201,7 +201,11 @@ DATABASES['default']['HOST']
 DATABASES['default']['PORT']
 DATABASES['default']['PASSWORD']
 
+'''
 conn = pymysql.connect(host=os.environ.get("MYSQL_ADDRESS"), user=DATABASES['default']['USER'],password=DATABASES['default']['PASSWORD'],database=os.environ.get("MYSQL_DATABASE"),charset="utf8")
+
+#conn = pymysql.connect(host='10.0.224.3', port=3306,user='root',password=')bk7K.9w',database='django_demo',charset="utf8")
+
 # 得到一个可以执行SQL语句的光标对象
 cursor = conn.cursor()
 # 定义要执行的SQL语句
@@ -209,8 +213,9 @@ sqls =[
 		"CREATE DATABASE IF NOT EXISTS django_demo;",
 		"USE django_demo;",
 		"CREATE TABLE IF NOT EXISTS `Counters` (`id` int(11) NOT NULL AUTO_INCREMENT, `count` int(11) NOT NULL DEFAULT 1, `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;",
-		"CREATE TABLE IF NOT EXISTS `Markers` (`id` int(11) NOT NULL AUTO_INCREMENT, `userid` char(255) NOT NULL DEFAULT ``, `longtitude` float NOT NULL DEFAULT 0, `latitude` float NOT NULL DEFAULT 0, `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;"
-	]   
+		"CREATE TABLE IF NOT EXISTS `Markers` (`id` int(11) NOT NULL AUTO_INCREMENT, `userid` char(255) NOT NULL DEFAULT '', `longtitude` float NOT NULL DEFAULT 0.0, `latitude` float NOT NULL DEFAULT 0.0, `meno` char(255) NOT NULL DEFAULT '',`updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;"
+	]
+
 # 执行SQL语句
 for sql in sqls:
     cursor.execute(sql)
@@ -219,4 +224,3 @@ for sql in sqls:
 cursor.close()
 # 关闭数据库连接
 conn.close()
-'''
