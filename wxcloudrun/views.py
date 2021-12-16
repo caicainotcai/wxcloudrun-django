@@ -4,6 +4,7 @@ import logging
 from django.http import JsonResponse
 from django.shortcuts import render
 from wxcloudrun.models import Counters,Markers
+from datetime import datetime
 
 
 logger = logging.getLogger('log')
@@ -93,6 +94,7 @@ def update_count(request):
         data.longtitude=body['longtitude']
         data.latitude=body['latitude']
         data.memo=body['memo']
+        data.updatedAt=datetime.now()
         data.save()
         return JsonResponse({'marked': 1, "data": data.id},
                     json_dumps_params={'ensure_ascii': False})
