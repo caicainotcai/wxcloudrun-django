@@ -94,7 +94,7 @@ def update_count(request):
         data.latitude=body['latitude']
         data.memo=body['memo']
         data.save()
-        return JsonResponse({'marked'': 1, "data": data.id},
+        return JsonResponse({'marked': 1, "data": data.id},
                     json_dumps_params={'ensure_ascii': False})
     else:
         return JsonResponse({'code': -1, 'errorMsg': 'action参数错误'},
