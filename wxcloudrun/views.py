@@ -65,7 +65,7 @@ def update_count(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
 
-    if 'action' not in body:
+    if 'action' not in body and 'MsgType' not in body:
         return JsonResponse({'code': -1, 'errorMsg': '缺少action参数'},
                             json_dumps_params={'ensure_ascii': False})
 
