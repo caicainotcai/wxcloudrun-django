@@ -87,13 +87,13 @@ def update_count(request):
             logger.info('record not exist')
         return JsonResponse({'code': 0, 'data': 0},
                     json_dumps_params={'ensure_ascii': False})
-    elif body['action'] == 'mark':
+    elif body['MsgType'] == 'location':
         #更新位置信息
         data=Markers()
-        data.userid=body['userid']
-        data.longtitude=body['longtitude']
-        data.latitude=body['latitude']
-        data.memo=body['memo']
+        data.userid=body['FromUserName']
+        data.longtitude=body['Location_Y']
+        data.latitude=body['Location_X']
+        data.memo=body['Label']
         data.updatedAt=datetime.now()
         data.save()
         return JsonResponse({'marked': 1, "data": data.id},
@@ -101,3 +101,17 @@ def update_count(request):
     else:
         return JsonResponse({'code': -1, 'errorMsg': 'action参数错误'},
                     json_dumps_params={'ensure_ascii': False})
+
+'''
+{
+    "ToUserName": "gh_d1031e52fbba",
+    "FromUserName": "obv5P5rjGYxf06h5kfvCeIqw-mD0",
+    "CreateTime": 1639716843,
+    "MsgType": "location",
+    "Location_X": 20.028543,
+    "Location_Y": 110.313248,
+    "Scale": 15,
+    "Label": "\xe9\xbe\x99\xe5\x8d\x8e\xe5\x8c\xba\xe6\xbb\xa8\xe6\xb5\xb7\xe5\xa4\xa7\xe9\x81\x9389\xe5\x8f\xb7",
+    "MsgId": 23475101167457529
+    }
+'''
