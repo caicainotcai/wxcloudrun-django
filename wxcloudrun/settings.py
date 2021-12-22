@@ -202,7 +202,7 @@ DATABASES['default']['PORT']
 DATABASES['default']['PASSWORD']
 
 '''
-conn = pymysql.connect(host=DATABASES['default']['HOST'],port=int(DATABASES['default']['PORT']), user=DATABASES['default']['USER'],password=DATABASES['default']['PASSWORD'],database=os.environ.get("MYSQL_DATABASE"),charset="utf8")
+conn = pymysql.connect(host=DATABASES['default']['HOST'],port=int(DATABASES['default']['PORT']), user=DATABASES['default']['USER'],password=DATABASES['default']['PASSWORD'],database=os.environ.get("MYSQL_DATABASE", 'django_demo'),charset="utf8")
 
 #conn = pymysql.connect(host='10.0.224.3', port=3306,user='root',password=')bk7K.9w',database='django_demo',charset="utf8")
 

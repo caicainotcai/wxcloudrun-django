@@ -12,14 +12,14 @@
 		"MYSQL_ADDRESS":"10.0.224.3:3306",
 		"MYSQL_PASSWORD":")bk7K.9w",
 		"MYSQL_USERNAME":"root"
-	},                                // 环境变量。可以有多个。
+	},                                				// 环境变量。可以有多个。
 	"customLogs": "stdout",                         // 日志采集路径
-	"initialDelaySeconds": 2,                        // 容器启动后延迟多久开始健康检查。默认值2秒。
+	"initialDelaySeconds": 2,                       // 容器启动后延迟多久开始健康检查。默认值2秒。
 	"dataBaseName":"django_demo",
 	"executeSQLs":[
 		"CREATE DATABASE IF NOT EXISTS django_demo;",
 		"USE django_demo;",
 		"CREATE TABLE IF NOT EXISTS `Counters` (`id` int(11) NOT NULL AUTO_INCREMENT, `count` int(11) NOT NULL DEFAULT 1, `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;",
 		"CREATE TABLE IF NOT EXISTS `Markers` (`id` int(11) NOT NULL AUTO_INCREMENT, `userid` char(255) NOT NULL DEFAULT ``, `longtitude` float NOT NULL DEFAULT 0, `latitude` float NOT NULL DEFAULT 0, `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;"
-	]    
+	]
 }
