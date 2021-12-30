@@ -150,7 +150,7 @@ def search(request, _):
         # 进行数据库查询
         content = Markers.objects.filter(Q(userid__iregex=name))#这里返回的是多条数据
         if content.exists():
-              paginator = Paginator(content, 5)   # 每页显示5条
+              paginator = Paginator(content, 20)   # 每页显示5条
               try:
                  num = request.GET.get('index', 1)  # 页面连接，用于翻页
                  number = paginator.page(num)
