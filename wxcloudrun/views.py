@@ -5,6 +5,8 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from wxcloudrun.models import Counters,Markers
 from datetime import datetime
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 logger = logging.getLogger('log')
@@ -30,7 +32,7 @@ def counter(request, _):
     rsp = JsonResponse({'code': 0, 'errorMsg': ''}, json_dumps_params={'ensure_ascii': False})
     if request.method == 'GET' or request.method == 'get':
         logger.info('update_count req: {}'.format(request.body))
-        logger.info('update_count req: {}'.format(request.GET))
+        #logger.info('update_count req: start:{}'.format(request.GET['start']))
         rsp = get_count()
     elif request.method == 'POST' or request.method == 'post':
         rsp = update_count(request)
@@ -122,3 +124,39 @@ def update_count(request):
     "MsgId": 23475101167457529
     }
 '''
+
+def search(request, _):
+    if request.method == "GET":  # 如果是翻页将会进入到get方式中
+        name = request.GET.get('name')
+         # 进行数据库查询
+        content = Markers.objects.filter(~Q(userid=name))#这里返回的是多条数据
+        #logger.info('update_count req:name: {}'.format(content))
+        #print(content)
+        if content.exists():
+           paginator = Paginator(content, 2)   # 每页显示5条
+           try:
+                 num = request.GET.get('index', 1)  # 页面连接，用于翻页
+                 number = paginator.page(num)
+           except PageNotAnInteger:
+                 number = paginator.page(1)
+           except EmptyPage:
+                 number = paginator.page(paginator.num_pages)
+           return render(request,'first.html',{'paginator':paginator})
+        return render(request,'first.html')
+
+    else:
+        name = request.POST.get('name')
+        request.session['name'] = name   # POST 方式中用于接收前台数据并存入session
+        # 进行数据库查询
+        content = Markers.objects.filter(Q(userid__iregex=name))#这里返回的是多条数据
+        if content.exists():
+              paginator = Paginator(content, 5)   # 每页显示5条
+              try:
+                 num = request.GET.get('index', 1)  # 页面连接，用于翻页
+                 number = paginator.page(num)
+              except PageNotAnInteger:
+                 number = paginator.page(1)
+              except EmptyPage:
+                 number = paginator.page(paginator.num_pages)
+              return render(request,'first.html',{'paginator':paginator})
+        return render(request,'first.html')

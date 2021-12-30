@@ -69,10 +69,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get("MYSQL_DATABASE", 'django_demo'),
-        'USER': os.environ.get("MYSQL_USERNAME"),
-        'HOST': os.environ.get("MYSQL_ADDRESS").split(':')[0],
-        'PORT': os.environ.get("MYSQL_ADDRESS").split(':')[1],
-        'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
+        'USER': os.environ.get("MYSQL_USERNAME",'root'),
+        'HOST': os.environ.get("MYSQL_ADDRESS",'127.0.0.1:3306').split(':')[0],
+        'PORT': os.environ.get("MYSQL_ADDRESS",'127.0.0.1:3306').split(':')[1],
+        'PASSWORD': os.environ.get("MYSQL_PASSWORD",''),
         'OPTIONS': {'charset': 'utf8mb4'},
     }
 }
@@ -213,7 +213,7 @@ sqls =[
 		"CREATE DATABASE IF NOT EXISTS django_demo;",
 		"USE django_demo;",
 		"CREATE TABLE IF NOT EXISTS `Counters` (`id` int(11) NOT NULL AUTO_INCREMENT, `count` int(11) NOT NULL DEFAULT 1, `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;",
-		"CREATE TABLE IF NOT EXISTS `Markers` (`id` int(11) NOT NULL AUTO_INCREMENT, `userid` char(255) NOT NULL DEFAULT '', `longtitude` float NOT NULL DEFAULT 0.0, `latitude` float NOT NULL DEFAULT 0.0, `meno` char(255) NOT NULL DEFAULT '',`updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;"
+		"CREATE TABLE IF NOT EXISTS `Markers` (`id` int(11) NOT NULL AUTO_INCREMENT, `userid` char(255) NOT NULL DEFAULT '', `longtitude` float NOT NULL DEFAULT 0.0, `latitude` float NOT NULL DEFAULT 0.0, `memo` char(255) NOT NULL DEFAULT '',`updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;"
 	]
 
 # 执行SQL语句

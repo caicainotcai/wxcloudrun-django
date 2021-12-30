@@ -16,6 +16,9 @@ class Counters(models.Model):
     class Meta:
         db_table = 'Counters'  # 数据库表名
 
+class MarkerManager(models.Manager):
+    def title_count(self,keyword):
+        return self.filter(title__icontains=keyword).cout()
 
 # Create your models here.
 class Markers(models.Model):
@@ -26,9 +29,13 @@ class Markers(models.Model):
     memo = models.TextField(max_length=255, default='')
     updatedAt = models.DateTimeField(default=datetime.now(),)
     #updatedAt = models.DateTimeField(default=datetime.now(),)
+    objects=MarkerManager()
 
+    def __unicode__(self):
+        return self.userid
+    
     def __str__(self):
-        return self.title
+        return self.userid
 
     class Meta:
         db_table = 'Markers'  # 数据库表名

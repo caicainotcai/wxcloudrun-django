@@ -15,4 +15,55 @@
 		<input name="timeend" type="date"/>
 	</p>
 	<input id="abcd" name="submit" type="submit" value="查询" onclick="display()"/>
+
+
+	<!--first.html-->
+	{% for item in page.object_list%}
+	{{item.name}}
+	{%endfor%}
+
+	<!--分页部分-->
+	<div>
+		<nav aria-label="Page navigation">
+			<ul class="pagination">
+				{% if page.has_previous %}
+					<li>
+						<a href="?index={{ page.previous_page_number }}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+				{% else %}
+					<li class="disabled">
+						<a href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+				{% endif %}
+
+				{% for page_number in paginator.page_range %}
+					{% if page_number == page.number %}
+						<li class="active"><a href="#">{{ page_number }}</a></li>
+					{% else %}
+						<li><a href="?index={{ page_number }}">{{ page_number }}</a></li>
+					{% endif %}
+
+				{% endfor %}
+				{% if page.has_next %}
+					<li>
+						<a href="?index={{ page.next_page_number }}" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				{% else %}
+					<li class="disabled">
+						<a href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				{% endif %}
+
+			</ul>
+		</nav>
+
+	</div>
 </form>
