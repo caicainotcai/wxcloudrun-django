@@ -133,7 +133,7 @@ def search(request, _):
         #logger.info('update_count req:name: {}'.format(content))
         #print(content)
         if content.exists():
-           paginator = Paginator(content, 2)   # 每页显示5条
+           paginator = Paginator(content, 30)   # 每页显示5条
            try:
                  num = request.GET.get('index', 1)  # 页面连接，用于翻页
                  number = paginator.page(num)
@@ -148,9 +148,9 @@ def search(request, _):
         name = request.POST.get('name')
         request.session['name'] = name   # POST 方式中用于接收前台数据并存入session
         # 进行数据库查询
-        content = Markers.objects.filter(Q(userid__iregex=name))#这里返回的是多条数据
+        content = Markers.objects.filter(~Q(userid=name))#这里返回的是多条数据
         if content.exists():
-              paginator = Paginator(content, 20)   # 每页显示5条
+              paginator = Paginator(content, 30)   # 每页显示5条
               try:
                  num = request.GET.get('index', 1)  # 页面连接，用于翻页
                  number = paginator.page(num)
