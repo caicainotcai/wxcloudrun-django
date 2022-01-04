@@ -1,12 +1,13 @@
 import json
 import logging
 
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from django.shortcuts import render
 from wxcloudrun.models import Counters,Markers
 from datetime import datetime
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.forms.models import model_to_dict
 
 
 logger = logging.getLogger('log')
@@ -28,7 +29,7 @@ def counter(request, _):
 
      `` request `` 请求对象
     """
-
+    #
     rsp = JsonResponse({'code': 0, 'errorMsg': ''}, json_dumps_params={'ensure_ascii': False})
     if request.method == 'GET' or request.method == 'get':
         logger.info('update_count req: {}'.format(request.body))
@@ -131,6 +132,8 @@ def search(request, _):
          # 进行数据库查询
         content = Markers.objects.filter(~Q(userid=name))#这里返回的是多条数据
         #logger.info('update_count req:name: {}'.format(content))
+        contentj = model_to_dict(content)
+        return HttpResponse(json.dumps(contentj),content_type="application/json")
         #print(content)
         if content.exists():
            paginator = Paginator(content, 30)   # 每页显示5条
