@@ -132,7 +132,7 @@ def search(request, _):
          # 进行数据库查询
         content = Markers.objects.filter(~Q(userid=name))#这里返回的是多条数据
         #logger.info('update_count req:name: {}'.format(content))
-        # contentj = model_to_dict(content)
+        ## contentj = model_to_dict(content)
         # return HttpResponse(json.dumps(contentj),content_type="application/json")
         #print(content)
         if content.exists():
